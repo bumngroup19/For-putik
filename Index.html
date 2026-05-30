@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Untuk Utik 💖</title>
+<style>
+body{
+margin:0;
+overflow:hidden;
+font-family:Arial,sans-serif;
+background:linear-gradient(180deg,#ffd6e7,#fff0f6);
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:#444;
+}
+.card{
+width:90%;
+max-width:700px;
+background:rgba(255,255,255,.85);
+padding:25px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+animation:fade .6s;
+position:relative;
+z-index:2;
+}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+#next{
+margin-top:20px;
+font-size:28px;
+cursor:pointer;
+border:none;
+background:none;
+}
+.letter{
+font-size:90px;
+cursor:pointer;
+}
+.heart{
+position:fixed;
+bottom:-20px;
+animation:float linear forwards;
+pointer-events:none;
+}
+@keyframes float{
+from{transform:translateY(0);opacity:1}
+to{transform:translateY(-110vh);opacity:0}
+}
+.buttons a{
+display:inline-block;
+padding:12px 20px;
+margin:10px;
+border-radius:15px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+}
+.yes{background:#2ecc71}
+.no{background:#e74c3c}
+.footer{
+position:fixed;
+bottom:8px;
+left:0;
+right:0;
+text-align:center;
+font-size:12px;
+color:#777;
+z-index:3;
+}
+</style>
+</head>
+<body>
+
+<!-- GANTI FILE MP3 DI SINI -->
+<audio id="bgm" loop>
+<source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<div class="card" id="card"></div>
+
+<div class="footer">© by Jelema Gabut</div>
+
+<script>
+const slides=[
+`<h3>Pencet bub</h3><div class="letter" onclick="start()">💌</div>`,
+`<h2>Halo Utik☺️👋</h2>`,
+`<p>Met malem, maaf ya ganggu waktu nya</p>`,
+`<p>Utik, aku mau ngomong sesuatu, aku gk tau si jawaban kamu bakal gimana</p>`,
+`<p>Tapi bagaimana pun jawabannya bakal aku terima kok☺️</p>`,
+`<p>Aku gak tau harus mulai dari mana..... Tapi....</p>`,
+`<p>Intinya aku suka sama kamu, ya... kamu keknya juga uda tau lah ya dari sikap aku waktu itu....</p>`,
+`<p>Tapi ya mau gimana lagi, gengsi aku tinggi loh buat ngakuin sesuatu..</p>`,
+`<p>Ya cuma mo bilang ini doang</p>`,
+`<p>Aku suka sama kamu put, terserah untuk jawabannya aku bakal terima kok 💖</p>`,
+`<div class="buttons">
+<a class="yes" href="https://wa.me/6288297600727?text=ya%20aku%20terima">💚 Ya aku terima</a>
+<a class="no" href="https://wa.me/6288297600727?text=maaf%20ya">❤️ Maaf ya</a>
+</div>`
+];
+
+let current=0;
+const card=document.getElementById("card");
+card.innerHTML=slides[0];
+
+function start(){
+document.getElementById("bgm").play().catch(()=>{});
+current=1;
+showSlide();
+burst();
+}
+
+function showSlide(){
+let html=slides[current];
+if(current>0 && current<slides.length-1){
+html+=`<br><button id="next" onclick="nextSlide()">➡️</button>`;
+}
+card.innerHTML=html;
+}
+
+function nextSlide(){
+if(current<slides.length-1){
+current++;
+showSlide();
+}
+}
+
+function burst(){
+for(let i=0;i<80;i++){
+setTimeout(createHeart,i*25);
+}
+}
+
+function createHeart(){
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML=Math.random()>0.5?'💖':'💕';
+h.style.left=Math.random()*100+'vw';
+h.style.fontSize=(15+Math.random()*30)+'px';
+h.style.animationDuration=(4+Math.random()*5)+'s';
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),9000);
+}
+
+setInterval(createHeart,350);
+</script>
+
+</body>
+</html>
+
